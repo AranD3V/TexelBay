@@ -11,6 +11,20 @@ const s3Client = new S3Client({
 
 async function generateUploadUrl(fileName, fileType) {
     const uniqueFileName = `${Date.now()}-${fileName}`;
-    
+    const bucketName = process.env.AWS_S3_BUCKET_NAME;
+
+    const command = new PutObjectCommand({
+        Bucket: bucketName,
+        Key: `assets/${uniqueFileName}`,
+        ContentType: fileType,
+    });
+
+    const signedUrl = await getSignedUrl(s3Client, command, { expiresIn:600 });
+
+    return{
+        signedUrl,
+        fileName: uniqueFileName,
+    };
+    module.exports = {generateUploadUrl};
     
 }

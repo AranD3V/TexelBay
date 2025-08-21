@@ -10,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/assets', require('./routes/assets'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => HTMLFormControlsCollection.log(`Server running on port ${PORT}`));

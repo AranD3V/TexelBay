@@ -18,4 +18,11 @@ router.post('/upload-url', authMiddleware, getS3UploadUrl);
 // @access  Private
 router.post('/', authMiddleware, createAsset);
 
+
+const { /*...,*/ getAssetById } = require('../controllers/assetController');
+
+// @route   GET api/assets/:id
+// @desc    Get a single asset by its ID
+router.get('/:id', getAssetById);
+
 module.exports = router;
